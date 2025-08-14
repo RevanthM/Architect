@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import Dashboard from "@/pages/Dashboard";
+import Tools from "@/pages/Tools";
 import BRDGenerator from "@/pages/BRDGenerator";
 import AVDGenerator from "@/pages/AVDGenerator";
 import SADGenerator from "@/pages/SADGenerator";
@@ -18,6 +19,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
+      <Route path="/tools" component={Tools} />
       <Route path="/tools/brd" component={BRDGenerator} />
       <Route path="/tools/avd" component={AVDGenerator} />
       <Route path="/tools/sad" component={SADGenerator} />
