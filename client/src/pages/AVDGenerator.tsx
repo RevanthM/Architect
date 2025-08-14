@@ -21,12 +21,11 @@ import { useToast } from "@/hooks/use-toast";
 const MODEL = "gpt-5"; // Use GPT-5 via OpenAI API
 
 const AVD_META_FIELDS = [
-  { id: "projectName", label: "Project Name", placeholder: "e.g., SnapTag – Photo Unification" },
+  { id: "projectName", label: "Project Name", placeholder: "Project Name" },
   { id: "projectId", label: "Project ID (UMT360/Other)", placeholder: "e.g., UMT360‑12345" },
   { id: "status", label: "Status", placeholder: "Draft / Final / Revision" },
   { id: "version", label: "Version", placeholder: "e.g., 0.1" },
   { id: "docDate", label: "Document Date", placeholder: "MM/DD/YYYY" },
-  { id: "preparedBy", label: "Prepared by", placeholder: "Your Name, Team" },
   { id: "authoredBy", label: "Authored By", placeholder: "Names" },
   { id: "peerReviewedBy", label: "Peer Reviewed By", placeholder: "Names" },
   { id: "sdcApprovalDate", label: "SDC Approval Date", placeholder: "MM/DD/YYYY (if known)" },
@@ -129,7 +128,6 @@ async function exportToDocx(meta: Record<string, string>, sections: Record<strin
     ["Status", meta.status],
     ["Version", meta.version],
     ["Date of Document", meta.docDate],
-    ["Prepared by", meta.preparedBy],
     ["Authored By", meta.authoredBy],
     ["Peer Reviewed By", meta.peerReviewedBy],
     ["SDC Approval Date", meta.sdcApprovalDate],
