@@ -18,7 +18,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 
 // ---------- Constants ----------
-const MODEL = "gpt-4"; // Use GPT-4 via OpenAI API
+const MODEL = "gpt-5"; // Use GPT-5 via OpenAI API
 
 const AVD_META_FIELDS = [
   { id: "projectName", label: "Project Name", placeholder: "e.g., SnapTag – Photo Unification" },
@@ -90,7 +90,7 @@ const SECTION_DIRECTIONS: Record<string, string> = {
 };
 
 // ---------- OpenAI API Helper ----------
-async function generateWithOpenAI({ apiKey, model, system, user }: { apiKey: string; model: string; system: string; user: string }) {
+async function generateWithOpenAI({ model, system, user }: { model: string; system: string; user: string }) {
   const body = {
     model,
     messages: [
@@ -103,7 +103,7 @@ async function generateWithOpenAI({ apiKey, model, system, user }: { apiKey: str
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY || ""}`,
     },
     body: JSON.stringify(body),
   });
@@ -175,10 +175,6 @@ async function exportToDocx(meta: Record<string, string>, sections: Record<strin
 }
 
 export default function AVDGenerator() {
-  const [apiKey, setApiKey] = useState<string>("");
-  const [remember, setRemember] = useState<boolean>(() => {
-    return !!localStorage.getItem("avd_openai_key");
-  });
   const [meta, setMeta] = useState<Record<string, string>>(() =>
     Object.fromEntries(AVD_META_FIELDS.map(f => [f.id, localStorage.getItem(`avd_meta_${f.id}`) || ""]))
   );
@@ -187,12 +183,6 @@ export default function AVDGenerator() {
   const [sectionText, setSectionText] = useState<Record<string, string>>(() => Object.fromEntries(SECTIONS.map(s => [s.id, ""])));
   const [busy, setBusy] = useState<string | null>(null);
   const { toast } = useToast();
-
-  // Load API key from localStorage if present
-  useEffect(() => {
-    const k = localStorage.getItem("avd_openai_key");
-    if (k) setApiKey(k);
-  }, []);
 
   const baseSystemPrompt = useMemo(() => {
     return [
@@ -226,19 +216,9 @@ export default function AVDGenerator() {
   }
 
   async function handleGenerate(sectionId: string) {
-    if (!apiKey) {
-      toast({
-        title: "API Key Required",
-        description: "Please enter your OpenAI API key first.",
-        variant: "destructive"
-      });
-      return;
-    }
-
     try {
       setBusy(sectionId);
       const text = await generateWithOpenAI({
-        apiKey,
         model: MODEL,
         system: baseSystemPrompt,
         user: buildUserPrompt(sectionId),
@@ -260,15 +240,6 @@ export default function AVDGenerator() {
   }
 
   async function handleGenerateAll() {
-    if (!apiKey) {
-      toast({
-        title: "API Key Required",
-        description: "Please enter your OpenAI API key first.",
-        variant: "destructive"
-      });
-      return;
-    }
-
     setBusy("all");
     try {
       for (const s of SECTIONS) {
@@ -283,11 +254,7 @@ export default function AVDGenerator() {
     }
   }
 
-  function handleRememberToggle(checked: boolean) {
-    setRemember(checked);
-    if (checked && apiKey) localStorage.setItem("avd_openai_key", apiKey);
-    if (!checked) localStorage.removeItem("avd_openai_key");
-  }
+
 
   async function handleDownloadDocx() {
     try {
@@ -370,44 +337,7 @@ export default function AVDGenerator() {
           <div className="text-sm text-enterprise-500 dark:text-gray-400">Model: {MODEL}</div>
         </div>
 
-        {/* API Key Section */}
-        <Card className="border border-enterprise-200 dark:border-gray-700">
-          <CardContent className="p-6">
-            <h3 className="font-medium text-enterprise-800 dark:text-white mb-4">OpenAI API</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="apiKey" className="text-sm font-medium text-enterprise-700 dark:text-gray-300">
-                  API Key
-                </Label>
-                <Input
-                  id="apiKey"
-                  type="password"
-                  placeholder="Paste your OpenAI API key"
-                  value={apiKey}
-                  onChange={(e) => {
-                    setApiKey(e.target.value);
-                    if (remember) localStorage.setItem("avd_openai_key", e.target.value);
-                  }}
-                  className="border-enterprise-300 focus:ring-indigo-500 focus:border-indigo-500"
-                  data-testid="input-api-key"
-                />
-              </div>
-              <div className="flex items-end">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="remember"
-                    checked={remember}
-                    onCheckedChange={handleRememberToggle}
-                    data-testid="checkbox-remember-key"
-                  />
-                  <Label htmlFor="remember" className="text-sm text-enterprise-600 dark:text-gray-300">
-                    Remember key in this browser (insecure on shared machines)
-                  </Label>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+
 
         {/* Document Metadata */}
         <Card className="border border-enterprise-200 dark:border-gray-700">
@@ -471,7 +401,7 @@ export default function AVDGenerator() {
         <div className="flex flex-wrap gap-4">
           <Button 
             onClick={handleGenerateAll} 
-            disabled={!!busy || !apiKey} 
+            disabled={!!busy} 
             className="bg-indigo-600 hover:bg-indigo-700 text-white"
             data-testid="button-generate-all"
           >
@@ -508,7 +438,7 @@ export default function AVDGenerator() {
                     </Button>
                     <Button
                       onClick={() => handleGenerate(id)}
-                      disabled={!!busy || !apiKey}
+                      disabled={!!busy}
                       variant="outline"
                       size="sm"
                       className="border-enterprise-300"
