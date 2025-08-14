@@ -177,7 +177,7 @@ export default function AVDGenerator() {
     Object.fromEntries(AVD_META_FIELDS.map(f => [f.id, localStorage.getItem(`avd_meta_${f.id}`) || ""]))
   );
   const [appSummary, setAppSummary] = useState<string>("");
-  const [extras, setExtras] = useState<string>("Constraints (security/identity/data), target users, non‑functional SLOs, known systems to integrate, browsers/devices, hosting preference, compliance flags (SOX/NERC/CEII). Add anything specific to your org.");
+  const [extras, setExtras] = useState<string>("you are creating an architecture vision document for southern california edison. Your goal is to fill out the document at a high level.");
   const [sectionText, setSectionText] = useState<Record<string, string>>(() => Object.fromEntries(SECTIONS.map(s => [s.id, ""])));
   const [busy, setBusy] = useState<string | null>(null);
   const { toast } = useToast();
