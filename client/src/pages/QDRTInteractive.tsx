@@ -276,8 +276,8 @@ function Button({ children, onClick, variant = "primary", disabled }: { children
 // Main Component
 // --------------------------
 export default function QDRTInteractive() {
-  const [apiKey, setApiKey] = useLocalStorage('qdrt:apiKey', '');
-  const [model, setModel] = useLocalStorage('qdrt:model', 'gpt-4');
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY || '';
+  const model = 'gpt-5';
   const [docText, setDocText] = useLocalStorage('qdrt:docText', '');
   const [filter, setFilter] = useState('');
   const [answers, setAnswers] = useLocalStorage('qdrt:answers', {});
@@ -300,7 +300,7 @@ export default function QDRTInteractive() {
 
   async function generateOne(q: any) {
     if (!apiKey) {
-      alert('Please provide an OpenAI API key');
+      alert('OpenAI API key not configured. Please contact the administrator.');
       return;
     }
     
@@ -340,7 +340,7 @@ export default function QDRTInteractive() {
 
   async function generateAll() {
     if (!apiKey) {
-      alert('Please provide an OpenAI API key to use AI generation');
+      alert('OpenAI API key not configured. Please contact the administrator.');
       return;
     }
     
@@ -440,27 +440,7 @@ export default function QDRTInteractive() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow p-4 border border-enterprise-200">
-              <h2 className="text-lg font-semibold mb-3 text-enterprise-800">AI Settings</h2>
-              <div className="space-y-3">
-                <Labeled label="OpenAI API Key">
-                  <Input 
-                    type="password" 
-                    value={apiKey} 
-                    onChange={setApiKey} 
-                    placeholder="sk-..." 
-                  />
-                </Labeled>
-                <Labeled label="Model">
-                  <Input 
-                    value={model} 
-                    onChange={setModel} 
-                    placeholder="gpt-4" 
-                  />
-                </Labeled>
-                <p className="text-xs text-enterprise-500">Your key is stored locally in your browser. The app calls OpenAI directly from your device.</p>
-              </div>
-            </div>
+
           </section>
 
           {/* Right rail: form */}
