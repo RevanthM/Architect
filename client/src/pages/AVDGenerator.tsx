@@ -53,7 +53,7 @@ const SECTIONS = [
 
 const SECTION_DIRECTIONS: Record<string, string> = {
   problemDescription:
-    "Write a crisp problem statement (3–6 bullets + 1 paragraph) for a React web application. Anchor to business drivers, scope boundaries, and success criteria. Avoid duplicating BRD; assume BRD §1 exists.",
+    "Write a crisp problem statement (3–6 bullets + 1 paragraph) for any type of application. Anchor to business drivers, scope boundaries, and success criteria.",
   stakeholders:
     "List stakeholders (human/system) and their concerns. Include org units where relevant. Format as table‑like bullets: Stakeholder → Concerns → Why it matters for the React app.",
   issuesScenarios:
