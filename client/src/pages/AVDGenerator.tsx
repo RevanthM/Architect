@@ -55,29 +55,29 @@ const SECTION_DIRECTIONS: Record<string, string> = {
   problemDescription:
     "Write a crisp problem statement (3–6 bullets + 1 paragraph) for any type of application. Anchor to business drivers, scope boundaries, and success criteria.",
   stakeholders:
-    "List stakeholders (human/system) and their concerns. Include org units where relevant. Format as table‑like bullets: Stakeholder → Concerns → Why it matters for the React app.",
+    "List stakeholders (human/system) and their concerns. Include org units where relevant. Format as table‑like bullets: Stakeholder → Concerns → Why it matters for the application.",
   issuesScenarios:
-    "Describe key business scenarios the React app must handle, each with trigger → primary actor(s) → high‑level steps → expected outcome. End with a one‑sentence business vision.",
+    "Describe key business scenarios the application must handle, each with trigger → primary actor(s) → high‑level steps → expected outcome. End with a one‑sentence business vision.",
   changeDrivers:
-    "Identify change drivers (regulatory, safety, cost, UX, time‑to‑market) and opportunities (reuse, standards, platform leverage). Map driver → architectural implication for React app.",
+    "Identify change drivers (regulatory, safety, cost, UX, time‑to‑market) and opportunities (reuse, standards, platform leverage). Map driver → architectural implication for the application.",
   solutionCategorization:
     "Pick RUN/GROW/INNOVATE. Justify in 3–5 bullets including sourcing strategy (MSP, vendor, RFP) and rationale.",
   actors:
-    "Enumerate actors and roles that will interact with the React app (humans + systems). Include at least: end users, support, security, integration services. Provide role → responsibilities → touchpoints.",
+    "Enumerate actors and roles that will interact with the application (humans + systems). Include at least: end users, support, security, integration services. Provide role → responsibilities → touchpoints.",
   processDescription:
-    "Outline in‑scope business processes the React app supports. Provide a numbered list of processes and a brief information‑flow narrative for each. Note any SOX / NERC / CEII control implications if applicable.",
+    "Outline in‑scope business processes the application supports. Provide a numbered list of processes and a brief information‑flow narrative for each. Note any SOX / NERC / CEII control implications if applicable.",
   bizTechEnv:
-    "Describe the business environment (departments, customers) and technical environment (browsers, devices, SSO, APIs, hosting, data sources). Keep to what affects conceptual design of a React app.",
+    "Describe the business environment (departments, customers) and technical environment (technology stack, devices, SSO, APIs, hosting, data sources). Keep to what affects conceptual design of the application.",
   crossDependencies:
     "List known or likely cross‑project dependencies (by project name/ID if known): dependency → impact → mitigation/owner.",
   conceptualArch:
-    "Describe the conceptual architecture for a React app in prose. Include: client (React), API layer, auth, data layer, integration, observability, CI/CD. Then provide an ASCII context diagram and an application lifecycle table (Deploy/Enhance/Sustain/Re‑Platform/Replace/Decommission).",
+    "Describe the conceptual architecture for the application in prose. Include: frontend/client, API layer, auth, data layer, integration, observability, CI/CD. Then provide an ASCII context diagram and an application lifecycle table (Deploy/Enhance/Sustain/Re‑Platform/Replace/Decommission).",
   constraintsAssumptions:
     "List hard constraints (security, identity, data residency, browser policy, performance SLOs) and assumptions (availability of APIs, vendor agreements, budget).",
   principles:
-    "State 6–10 architecture principles relevant to a React app (e.g., least privilege, 12‑factor, API‑first, progressive enhancement, observability‑by‑default), each with a one‑line rationale.",
+    "State 6–10 architecture principles relevant to the application (e.g., least privilege, 12‑factor, API‑first, progressive enhancement, observability‑by‑default), each with a one‑line rationale.",
   standardsPatterns:
-    "Name standards (enterprise + industry) and patterns/building blocks to leverage (e.g., React + TypeScript, design system, BFF pattern, REST/GraphQL, Zero‑Trust, OWASP ASVS).",
+    "Name standards (enterprise + industry) and patterns/building blocks to leverage (e.g., modern frameworks, design system, BFF pattern, REST/GraphQL, Zero‑Trust, OWASP ASVS).",
   componentType:
     "For each subsystem/component, map to System of Record / Engagement / Interaction / Differentiation. Include a 4‑column mini‑table: Component → Record → Engagement → Interaction → Differentiation.",
   areasImpacted:
@@ -196,7 +196,7 @@ export default function AVDGenerator() {
   }
 
   function buildUserPrompt(sectionId: string) {
-    const project = meta.projectName || "<Unnamed React App>";
+    const project = meta.projectName || "<Unnamed Application>";
     const why = appSummary?.trim() || "";
     const dir = SECTION_DIRECTIONS[sectionId] || "Write the section succinctly.";
     return [
@@ -206,7 +206,7 @@ export default function AVDGenerator() {
       extras ? `Additional constraints/notes: ${extras}` : "",
       "Expectations:",
       "- Do NOT repeat information across sections.",
-      "- Assume React + TypeScript front end; APIs exist or will be built; enterprise SSO; CI/CD; monitoring.",
+      "- Assume modern application architecture; APIs exist or will be built; enterprise SSO; CI/CD; monitoring.",
       `- Keep output ready to paste into the AVD as plain text.`,
       "",
       dir,
@@ -368,12 +368,12 @@ export default function AVDGenerator() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="appSummary" className="text-sm text-enterprise-600 dark:text-gray-300">
-                  What problem the React app solves, target users, core flows, integrations, guardrails…
+                  What problem the application solves, target users, core flows, integrations, guardrails…
                 </Label>
                 <Textarea
                   id="appSummary"
                   className="min-h-[120px] font-mono border-enterprise-300 focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Describe the purpose and context of your React application..."
+                  placeholder="Describe the purpose and context of your application..."
                   value={appSummary}
                   onChange={(e) => setAppSummary(e.target.value)}
                   data-testid="textarea-app-summary"
