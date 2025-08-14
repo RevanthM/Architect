@@ -9,7 +9,7 @@ import Dashboard from "@/pages/Dashboard";
 import BRDGenerator from "@/pages/BRDGenerator";
 import AVDGenerator from "@/pages/AVDGenerator";
 import SADGenerator from "@/pages/SADGenerator";
-import QDRTScorer from "@/pages/QDRTScorer";
+import QDRTInteractive from "@/pages/QDRTInteractive";
 import ProjectEstimator from "@/pages/ProjectEstimator";
 import SESGenerator from "@/pages/SESGenerator";
 import NotFound from "@/pages/not-found";
@@ -21,7 +21,7 @@ function Router() {
       <Route path="/tools/brd" component={BRDGenerator} />
       <Route path="/tools/avd" component={AVDGenerator} />
       <Route path="/tools/sad" component={SADGenerator} />
-      <Route path="/tools/qdrt" component={QDRTScorer} />
+      <Route path="/tools/qdrt" component={QDRTInteractive} />
       <Route path="/tools/estimator" component={ProjectEstimator} />
       <Route path="/tools/ses" component={SESGenerator} />
       <Route component={NotFound} />
