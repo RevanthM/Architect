@@ -7,6 +7,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import Dashboard from "@/pages/Dashboard";
 import Tools from "@/pages/Tools";
+import Projects from "@/pages/Projects";
+import SDLC from "@/pages/SDLC";
 import BRDGenerator from "@/pages/BRDGenerator";
 import AVDGenerator from "@/pages/AVDGenerator";
 import SADGenerator from "@/pages/SADGenerator";
@@ -20,6 +22,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Dashboard} />
       <Route path="/tools" component={Tools} />
+      <Route path="/projects" component={Projects} />
+      <Route path="/sdlc" component={SDLC} />
       <Route path="/tools/brd" component={BRDGenerator} />
       <Route path="/tools/avd" component={AVDGenerator} />
       <Route path="/tools/sad" component={SADGenerator} />

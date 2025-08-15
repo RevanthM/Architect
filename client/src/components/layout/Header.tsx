@@ -28,6 +28,16 @@ export function Header() {
                 Tools
               </span>
             </Link>
+            <Link href="/projects" data-testid="link-projects">
+              <span className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+                Projects
+              </span>
+            </Link>
+            <Link href="/sdlc" data-testid="link-sdlc">
+              <span className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+                SDLC
+              </span>
+            </Link>
             <a href="#" className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
               Documentation
             </a>
