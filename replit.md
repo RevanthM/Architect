@@ -13,6 +13,7 @@ The platform offers six main tools:
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+Navigation: Projects tab as default landing page, removed Dashboard, Documentation, and Support from navigation bar.
 
 # System Architecture
 

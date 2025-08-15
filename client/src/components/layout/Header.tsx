@@ -18,9 +18,9 @@ export function Header() {
             </div>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" data-testid="link-dashboard">
+            <Link href="/projects" data-testid="link-projects">
               <span className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-                Dashboard
+                Projects
               </span>
             </Link>
             <Link href="/tools" data-testid="link-tools">
@@ -28,22 +28,11 @@ export function Header() {
                 Tools
               </span>
             </Link>
-            <Link href="/projects" data-testid="link-projects">
-              <span className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-                Projects
-              </span>
-            </Link>
             <Link href="/sdlc" data-testid="link-sdlc">
               <span className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
                 SDLC
               </span>
             </Link>
-            <a href="#" className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-              Documentation
-            </a>
-            <a href="#" className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-              Support
-            </a>
           </nav>
           <div className="flex items-center">
             <Button className="bg-blue-600 hover:bg-blue-700 text-white" data-testid="button-profile">

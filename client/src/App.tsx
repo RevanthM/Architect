@@ -20,7 +20,8 @@ import NotFound from "@/pages/not-found";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
+      <Route path="/" component={Projects} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route path="/tools" component={Tools} />
       <Route path="/projects" component={Projects} />
       <Route path="/sdlc" component={SDLC} />
