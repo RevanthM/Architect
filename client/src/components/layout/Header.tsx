@@ -28,9 +28,9 @@ export function Header() {
                 Tools
               </span>
             </Link>
-            <Link href="/sdlc" data-testid="link-sdlc">
+            <Link href="/stps" data-testid="link-stps">
               <span className="text-enterprise-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-                SDLC
+                STPS
               </span>
             </Link>
           </nav>
